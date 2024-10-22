@@ -15,17 +15,20 @@ const config: {
         columnCount: {
           type: "number",
           label: "Number of Columns",
-          min: 1,
+          min: 2,
           max: 4,
         },
         children: {
-          type: "component",
+          type: "array", // Change type to array
           label: "Column Content",
+          itemType: "component", // Specify that items are components
         },
       },
       render: ({ columnCount, children }) => {
-        const columns = Array.from({ length: columnCount || 1 }).map(
-          (_, index) => (
+        const columns = Array.from({ length: columnCount || 1 }).map((_, index) => {
+          const childContent = children ? children[index] : undefined;
+
+          return (
             <div
               key={index}
               style={{
@@ -36,19 +39,17 @@ const config: {
                 textAlign: "center",
               }}
             >
-              {children && children[index] ? children[index] : `Column ${index + 1}`}
+              {childContent ? (
+                <Render config={config} data={childContent} /> // Render child component
+              ) : (
+                `Column ${index + 1}`
+              )}
             </div>
-          )
-        );
+          );
+        });
 
         return (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "stretch",
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "stretch" }}>
             {columns}
           </div>
         );
