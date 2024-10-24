@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Puck, ComponentConfig, Render, Data } from "@measured/puck";
+import dynamic from 'next/dynamic';
 import "@measured/puck/puck.css";
-import DropZone from '../DropZone';
 // import { DropZone } from "@measured/puck";
 
 // Puck component config with ColumnsBlock, CardBlock, and other components

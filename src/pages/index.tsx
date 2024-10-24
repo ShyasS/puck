@@ -1,8 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
-import Editor from "./Editor";
+import dynamic from 'next/dynamic';
+
+const Editor = dynamic(() => import('./Editor'), { ssr: false });
+
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
